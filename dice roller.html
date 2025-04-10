@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice Game</title>
+    <style>
+        body {
+            font-family: Arial, serif;
+            text-align: center;
+            background-color: #4b0000;
+            margin: 50px;
+        }
+        .dice-container {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 20px;
+        }
+        .player {
+            text-align: center;
+        }
+        .dice {
+            font-size: 100px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dice</h1>
+    <div class="dice-container">
+        <div class="dice">
+            <p class="Player1">Player 1</p>
+            <div class="dice" id="dice1"><img src="dice-3.256x256.png" alt="dice 3" class="img1"></div>
+            <p id="result1"></p>
+        </div>
+        <div class="dice">
+            <p class="Player2">Player 2</p>
+            <div class="dice" id="dice2"><img src="dice-3.256x256.png" alt="dice 3" class="img2"></div>
+            <p id="result2"></p>
+        </div>
+    </div>
+
+    <button onclick="rollDice()">Roll Dice</button>
+    <p id="winner"></p>
+
+    <div class="container bottom">
+        <button type="button" class="btn" onclick="editNames()"></button>
+        Edit Names
+    </div>
+
+    <script>
+        //player Name
+        let player1 = "Player1";
+        let player2 = "Player2";
+
+        function editNames(){
+            player1 = prompt("Change player1 name")
+            player2 = prompt("Change player2 name")
+
+            if(player1.length<1 || player2.length <1){
+                alert('please enter valid name')    ;
+                return;
+            }
+            document.querySelector("p.Player1")
+            .innerHTML = player1;
+
+            document.querySelector("p.Player2")
+            .innerHTML = player2;
+        }
+
+        function rollDice() {
+            let diceFaces = ["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"];
+            let roll1 = Math.floor(Math.random() * 6);
+            let roll2 = Math.floor(Math.random() * 6);
+            
+            document.getElementById("dice1").innerText = diceFaces[roll1];
+            document.getElementById("result1").innerText = Player 1 rolled a ${roll1 + 1}!;
+            
+            document.getElementById("dice2").innerText = diceFaces[roll2];
+            document.getElementById("result2").innerText = Player 2 rolled a ${roll2 + 1}!;
+            
+            let winnerText = "";
+            if (roll1 > roll2) {
+                winnerText = "Player 1 wins!";
+            } else if (roll2 > roll1) {
+                winnerText = "Player 2 wins!";
+            } else {
+                winnerText = "It's a tie!";
+            }
+            document.getElementById("winner").innerText = winnerText;
+        }
+    </script>
+</body>
+</html>
